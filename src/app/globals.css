@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-grotesk: "Space Grotesk", "IBM Plex Mono", monospace;
+
+  --color-ink: #140d06;
+  --color-espresso: #1c1207;
+  --color-surface: #241809;
+  --color-card: #2b1e0e;
+  --color-raised: #35260f;
+  --color-line: #40301a;
+  --color-line-soft: #31240f;
+  --color-cream: #f3e8d2;
+  --color-cream-dim: #c4b190;
+  --color-cream-mute: #94825f;
+  --color-amber: #f0a13c;
+  --color-amber-hi: #ffc670;
+  --color-chili: #e4572e;
+  --color-sage: #8cc084;
+  --color-sage-dim: #4c7a4b;
+  --color-teal: #5ec2b0;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-pulse-soft: pulseSoft 2.4s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulseSoft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink text-cream font-sans antialiased;
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgba(240, 161, 60, 0.07), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(94, 194, 176, 0.05), transparent 60%);
+  }
+  ::selection {
+    background: rgba(240, 161, 60, 0.85);
+    color: #140d06;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #140d06;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3a2b16;
+    border-radius: 8px;
+    border: 2px solid #140d06;
+  }
+  input[type="range"] {
+    @apply accent-amber;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface/80 backdrop-blur-sm;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-amber px-5 py-3 font-grotesk text-sm font-semibold tracking-wide text-ink transition-all duration-200 hover:bg-amber-hi hover:shadow-[0_8px_30px_rgba(240,161,60,0.35)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:shadow-none;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-transparent px-5 py-3 font-grotesk text-sm font-medium tracking-wide text-cream transition-all duration-200 hover:border-amber/60 hover:bg-amber/10 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-chili/50 bg-chili/10 px-4 py-2.5 font-grotesk text-sm font-medium text-chili transition-all hover:bg-chili/20 active:scale-[0.98];
+  }
+  .field {
+    @apply w-full rounded-xl border border-line bg-espresso/80 px-4 py-3 text-sm text-cream placeholder:text-cream-mute/60 outline-none transition-all focus:border-amber/70 focus:ring-2 focus:ring-amber/20;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1 font-grotesk text-xs tracking-wide text-cream-dim;
+  }
+  .label-caps {
+    @apply font-grotesk text-[11px] font-medium uppercase tracking-[0.22em] text-cream-mute;
+  }
+}
+
+/* Film-grain overlay */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Diagonal hatch pattern used for feasible regions */
+.hatch-amber {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(240, 161, 60, 0.35) 0px,
+    rgba(240, 161, 60, 0.35) 2px,
+    transparent 2px,
+    transparent 8px
+  );
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(243, 232, 210, 0.25);
+  color: transparent;
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
