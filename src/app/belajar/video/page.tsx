@@ -79,7 +79,7 @@ export default async function VideoPage() {
               className="h-full w-full object-cover"
             >
               <source
-                src="https://videos.pexels.com/video-files/11265881/11265881-hd_1920_1080_25fps.mp4"
+                src="https://videos.pexels.com/video-files/11265881/11265881-hd_1280_720_25fps.mp4"
                 type="video/mp4"
               />
               Browsermu tidak mendukung pemutar video.
